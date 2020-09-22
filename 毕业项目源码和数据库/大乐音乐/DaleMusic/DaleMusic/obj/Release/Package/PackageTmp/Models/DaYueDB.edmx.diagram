@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="428a492098a34f739ede4c81e6f3eb6e" Name="Diagram1">
+        <EntityTypeShape EntityType="DaYueDBModel.Manage" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DaYueDBModel.Music" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DaYueDBModel.MusicType" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DaYueDBModel.Singer" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DaYueDBModel.UserInfo" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="DaYueDBModel.FK_Music_Singer" ManuallyRouted="false" />
+        <AssociationConnector Association="DaYueDBModel.FK_Music_Type" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DaYueDBModel.MusicList" Width="1.5" PointX="5.25" PointY="3.5" />
+        <AssociationConnector Association="DaYueDBModel.FK_MusicList_Music" />
+        <AssociationConnector Association="DaYueDBModel.FK_MusicList_UserInfo" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

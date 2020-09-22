@@ -1,0 +1,168 @@
+﻿
+@{
+    ViewBag.Title = "SingerDatail";
+    Layout = "~/Views/Shared/_LayoutMusic.cshtml";
+}
+
+@using DaleMusic.Models
+@model Singer
+
+<div class="content">
+    <div class="container">
+        <!-- 内容左侧 -->
+        <div class="col-md-8 content-left">
+            <!-- artical-single-page -->
+            <div class="artical-details">
+                <h2 style="font-size:3em">@Model.SingerName</h2>
+                <!-- artical-details-info -->
+                <div class="artical-details-info">
+                    <div class="artical-details-info-left">
+                        <a href="~/Music/SingerDatail/@Model.SingerID"><img src="~/Content/歌手图片/@Model.SingerImage" title="name" /></a>
+                    </div>
+                    <div class="artical-details-info-right" style="font-size:1.5em">
+                        <p>
+                            <strong>歌手类型：</strong>@if (Model.SingerType == "1")
+                            {
+                                @:男歌手
+                            }
+                            else if (Model.SingerType == "0")
+                            {
+                                @:女歌手
+                            }
+                            else
+                            {
+                                @:组合
+                            }
+                        </p>
+                        <br />
+                        <a class="download" href="/Music/SingerIndex">返回上一级</a>
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <th>音乐名称</th>
+                            <th>歌手</th>
+                            <th>音乐类型</th>
+                            <th>国家</th>
+                            <th>封面</th>
+                            <th>发布日期</th>
+                        </tr>
+                        @if (Model.IsDelete == true)
+                        {
+                            foreach (var item in Model.Music)
+                            {
+                                <tr>
+                                    <td><a href="/Music/Detail/@item.MusicID">@item.MusicName</a></td>
+                                    <td>@item.Singer.SingerName</td>
+                                    <td><a href="/Music/TypeDatail/@item.MusicType.TypeID">@item.MusicType.TypeName</a></td>
+                                    <td>@item.MusicCountry</td>
+                                    <td>
+                                        <img src="~/Content/images/@item.MusicImage" style="height:70px;width:50px" />
+                                    </td>
+                                    <td>@item.MusicDate.Year 年 @item.MusicDate.Month 月</td>
+                                </tr>
+
+                            }
+                        }
+
+                    </table>
+                    @*<div>
+                        每页 @Model.PageSize 记录，总有 @Model.PageCount 页，当前 @Model.PageNumber 页
+                        @Html.PagedListPager(Model, page => Url.Action("MusicManage", new { page }))
+                    </div>*@
+                    <div class="clearfix"> </div>
+
+                </div>
+                <!-- artical-details-info -->
+            </div>
+            <!-- related-articals -->
+            <!-- artical-single-page -->
+            <div class="clearfix"> </div>
+        </div>
+        @*内容右侧*@
+        <div class="col-md-4 content-right">
+            <div class="recent-add">
+                <!----sreen-gallery-cursual---->
+                <div class="sreen-gallery-cursual">
+                    <!-- requried-jsfiles-for owl -->
+                    <link href="~/Content/css/owl.carousel.css" rel="stylesheet" />
+                    <script src="~/Scripts/js/owl.carousel.js"></script>
+                    <script>
+                        $(document).ready(function () {
+                            $("#owl-demo").owlCarousel({
+                                items: 1,
+                                lazyLoad: true,
+                                autoPlay: true,
+                                navigation: true,
+                                navigationText: false,
+                                pagination: true,
+                            });
+                        });
+                    </script>
+                    <!-- //requried-jsfiles-for owl -->
+                    <!-- start content_slider -->
+                    @*小轮播*@
+                    <div id="owl-demo" class="owl-carousel text-center">
+                        <div class="item">
+                            <img class="lazyOwl" src="~/Content/images/酒醉的蝴蝶.jpg" alt="name">
+                        </div>
+                        <div class="item">
+                            <img class="lazyOwl" src="~/Content/images/无价之姐.jpg" alt="name">
+                        </div>
+                        <div class="item">
+                            <img class="lazyOwl" src="~/Content/images/微微.jpg" alt="name">
+                        </div>
+                    </div>
+                    <!--//sreen-gallery-cursual---->
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+            <!-- popular-allbums -->
+            @*热门专辑*@
+            <div class="popular-albums">
+                <h2>热门音乐</h2>
+                <div onclick="location.href='/Music/Detail';" class="popular-allbum">
+                    <div class="popular-allbum-pic">
+                        <a href="#"><img src="~/Content/images/消愁.jpg" title="name" /></a>
+                    </div>
+                    <div class="popular-allbum-info">
+                        <h3><a href="#">消愁</a></h3>
+                        <p><strong>发行日期：</strong>  2017年7月</p>
+                        <p><strong>类型：</strong>流行</p>
+                        <p><strong>国家：</strong>中国</p>
+                        <p><strong>歌手：</strong> 毛不易</p>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <div onclick="location.href='/Music/Detail';" class="popular-allbum">
+                    <div class="popular-allbum-pic">
+                        <a href="#"><img src="~/Content/images/大鱼海棠.jpg" title="name" /></a>
+                    </div>
+                    <div class="popular-allbum-info">
+                        <h3><a href="#">大鱼</a></h3>
+                        <p><strong>发行日期：</strong>  2016年5月</p>
+                        <p><strong>类型：</strong>古风</p>
+                        <p><strong>国家：</strong>中国</p>
+                        <p><strong>歌手：</strong> 周深</p>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <div onclick="location.href='/Music/Detail';" class="popular-allbum">
+                    <div class="popular-allbum-pic">
+                        <a href="#"><img src="~/Content/images/知否知否.jpg" title="name" /></a>
+                    </div>
+                    <div class="popular-allbum-info">
+                        <h3><a href="#">知否知否</a></h3>
+                        <p><strong>发行日期：</strong>  2018年12月</p>
+                        <p><strong>类型：</strong>古风</p>
+                        <p><strong>国家：</strong>中国</p>
+                        <p><strong>歌手：</strong> 郁可唯</p>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+            <!-- popular-allbums -->
+            <!-- content-right -->
+        </div>
+    </div>
+</div>
+

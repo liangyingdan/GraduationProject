@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "SingerEdit";
+    Layout = "~/Views/Shared/_LayoutManage.cshtml";
+}
+@using DaleMusic.Models;
+@model Singer
+
+    <form action="/Manage/SingerEdit" method="post" class="form" enctype="multipart/form-data" onSubmit="return check(this)">
+        <input type="hidden" name="SingerID" id="SingerID" value="@Model.SingerID" />
+        <div><span>歌手名称：</span><input type="text" name="SingerName" id="SingerName" value="@Model.SingerName" /><br /></div>
+        <div>
+            <span>歌手图片：</span>
+            <input type="file" name="file" id="file" />
+            <img src="~/Content/歌手图片/@Model.SingerImage" style="height:70px;width:50px" /><br />
+        </div>
+        <div>
+            <span>歌手类型：</span>
+            @if (Model.SingerType == "1")
+            {
+                <input type="radio" name="SingerType" id="SingerType" value="1" checked />@:男歌手
+                <input type="radio" name="SingerType" id="SingerType" value="0" />@:女歌手
+                <input type="radio" name="SingerType" id="SingerType" value="2" />@:组合 
+            }
+            @if (Model.SingerType == "0")
+            {
+                <input type="radio" name="SingerType" id="SingerType" value="1" />@:男歌手
+                <input type="radio" name="SingerType" id="SingerType" value="0" checked />@:女歌手
+                <input type="radio" name="SingerType" id="SingerType" value="2" />@:组合
+            }
+            @if (Model.SingerType == "2")
+            {
+                <input type="radio" name="SingerType" id="SingerType" value="1" />@:男歌手
+                <input type="radio" name="SingerType" id="SingerType" value="0" />@:女歌手
+                <input type="radio" name="SingerType" id="SingerType" value="2" checked />@:组合
+            }
+        </div>
+        <input type="submit" value="提交" class="submit" />
+        <a href="/Manage/SingerManage">返回上一级</a>
+    </form>
+<script type="text/javascript">
+function check(){
+//			歌手名称
+		var name = document.getElementById("SingerName");
+		if(name.value==''){
+			alert('歌手名称不能为空');
+			name.focus();
+			return false;
+		}else{
+			var vname=(/^[a-zA-Z\u4e00-\u9fa5]{2,20}$/);
+			if (!vname.test(name.value)) {
+				alert('歌手名称2-20个字，只能是中文或英文');
+				name.focus();
+				return false;
+			}
+		}
+}
+
+</script>
+
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+</div>
+
+
+

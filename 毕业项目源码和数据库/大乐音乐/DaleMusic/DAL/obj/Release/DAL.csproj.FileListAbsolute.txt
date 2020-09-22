@@ -1,0 +1,8 @@
+F:\项目\大乐音乐\DaleMusic\DAL\bin\Release\DAL.dll
+F:\项目\大乐音乐\DaleMusic\DAL\bin\Release\DAL.pdb
+F:\项目\大乐音乐\DaleMusic\DAL\bin\Release\Models.dll
+F:\项目\大乐音乐\DaleMusic\DAL\bin\Release\Models.pdb
+F:\项目\大乐音乐\DaleMusic\DAL\obj\Release\DAL.csprojAssemblyReference.cache
+F:\项目\大乐音乐\DaleMusic\DAL\obj\Release\DAL.csproj.CopyComplete
+F:\项目\大乐音乐\DaleMusic\DAL\obj\Release\DAL.dll
+F:\项目\大乐音乐\DaleMusic\DAL\obj\Release\DAL.pdb

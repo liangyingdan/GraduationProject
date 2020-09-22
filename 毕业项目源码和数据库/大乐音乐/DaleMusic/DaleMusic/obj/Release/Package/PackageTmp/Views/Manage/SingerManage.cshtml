@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "SingerManage";
+    Layout = "~/Views/Shared/_LayoutManage.cshtml";
+}
+@using DaleMusic.Models;
+@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<Singer>
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+<h2>歌手列表</h2>
+<p>
+    <a href="/Manage/SingerCreat">添加新的歌手</a>
+</p>
+<form action="/Manage/SingerManage" method="post">
+    <input type="text" name="SingerName" id="SingerName" placeholder="输入歌手名称搜索" required>
+    <input type="submit" value="搜索" />
+</form>
+<table class="table">
+    <tr>
+        <th>编号</th>
+        <th>歌手名称</th>
+        <th>歌手图片</th>
+        <th>歌手类型</th>
+        <th>操作</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.SingerID</td>
+            <td>@item.SingerName</td>
+            <td>
+                <img src="~/Content/歌手图片/@item.SingerImage" style="height:70px;width:50px" />
+            </td>
+            <td>
+                @if (item.SingerType == "1")
+                {
+                    @:男歌手
+                }
+                else if (item.SingerType == "0")
+                {
+                    @:女歌手
+                }
+                else
+                {
+                    @:组合
+                }
+            </td>
+            <td>
+                <a href="/Manage/SingerEdit/@item.SingerID">修改</a>
+                <a href="/Manage/SingerDelete/@item.SingerID" onclick="return confirm('确定要删除它吗？')">删除</a>
+            </td>
+        </tr>
+    }
+</table>
+<div>
+    每页 @Model.PageSize 记录，总有 @Model.PageCount 页，当前 @Model.PageNumber 页
+    @Html.PagedListPager(Model, page => Url.Action("SingerManage", new { page }))
+</div>
+

@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DaYueDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Manage">
+    <Key>
+      <PropertyRef Name="ManageID" />
+    </Key>
+    <Property Name="ManageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ManageAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ManagePwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Music">
+    <Key>
+      <PropertyRef Name="MusicID" />
+    </Key>
+    <Property Name="MusicID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SingerID" Type="Int32" Nullable="false" />
+    <Property Name="TypeID" Type="Int32" Nullable="false" />
+    <Property Name="MusicImage" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="MusicName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MusicCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MusicDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="MusicFiles" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Singer" Relationship="Self.FK_Music_Singer" FromRole="Music" ToRole="Singer" />
+    <NavigationProperty Name="MusicType" Relationship="Self.FK_Music_Type" FromRole="Music" ToRole="MusicType" />
+    <NavigationProperty Name="MusicList" Relationship="DaYueDBModel.FK_MusicList_Music" FromRole="Music" ToRole="MusicList" />
+  </EntityType>
+  <EntityType Name="MusicType">
+    <Key>
+      <PropertyRef Name="TypeID" />
+    </Key>
+    <Property Name="TypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Music" Relationship="Self.FK_Music_Type" FromRole="MusicType" ToRole="Music" />
+  </EntityType>
+  <EntityType Name="Singer">
+    <Key>
+      <PropertyRef Name="SingerID" />
+    </Key>
+    <Property Name="SingerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SingerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SingerType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SingerImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Music" Relationship="Self.FK_Music_Singer" FromRole="Singer" ToRole="Music" />
+  </EntityType>
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserPwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="MusicList" Relationship="DaYueDBModel.FK_MusicList_UserInfo" FromRole="UserInfo" ToRole="MusicList" />
+  </EntityType>
+  <Association Name="FK_Music_Singer">
+    <End Role="Singer" Type="Self.Singer" Multiplicity="1" />
+    <End Role="Music" Type="Self.Music" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Singer">
+        <PropertyRef Name="SingerID" />
+      </Principal>
+      <Dependent Role="Music">
+        <PropertyRef Name="SingerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Music_Type">
+    <End Role="MusicType" Type="Self.MusicType" Multiplicity="1" />
+    <End Role="Music" Type="Self.Music" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MusicType">
+        <PropertyRef Name="TypeID" />
+      </Principal>
+      <Dependent Role="Music">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DaYueDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Manage" EntityType="Self.Manage" />
+    <EntitySet Name="Music" EntityType="Self.Music" />
+    <EntitySet Name="MusicType" EntityType="Self.MusicType" />
+    <EntitySet Name="Singer" EntityType="Self.Singer" />
+    <EntitySet Name="UserInfo" EntityType="Self.UserInfo" />
+    <AssociationSet Name="FK_Music_Singer" Association="Self.FK_Music_Singer">
+      <End Role="Singer" EntitySet="Singer" />
+      <End Role="Music" EntitySet="Music" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Music_Type" Association="Self.FK_Music_Type">
+      <End Role="MusicType" EntitySet="MusicType" />
+      <End Role="Music" EntitySet="Music" />
+    </AssociationSet>
+    <EntitySet Name="MusicList" EntityType="DaYueDBModel.MusicList" />
+    <AssociationSet Name="FK_MusicList_Music" Association="DaYueDBModel.FK_MusicList_Music">
+      <End Role="Music" EntitySet="Music" />
+      <End Role="MusicList" EntitySet="MusicList" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MusicList_UserInfo" Association="DaYueDBModel.FK_MusicList_UserInfo">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="MusicList" EntitySet="MusicList" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="MusicList">
+    <Key>
+      <PropertyRef Name="ListID" />
+    </Key>
+    <Property Name="ListID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MusicID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Music" Relationship="DaYueDBModel.FK_MusicList_Music" FromRole="MusicList" ToRole="Music" />
+    <NavigationProperty Name="UserInfo" Relationship="DaYueDBModel.FK_MusicList_UserInfo" FromRole="MusicList" ToRole="UserInfo" />
+    <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_MusicList_Music">
+    <End Type="DaYueDBModel.Music" Role="Music" Multiplicity="1" />
+    <End Type="DaYueDBModel.MusicList" Role="MusicList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Music">
+        <PropertyRef Name="MusicID" />
+      </Principal>
+      <Dependent Role="MusicList">
+        <PropertyRef Name="MusicID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MusicList_UserInfo">
+    <End Type="DaYueDBModel.UserInfo" Role="UserInfo" Multiplicity="1" />
+    <End Type="DaYueDBModel.MusicList" Role="MusicList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="MusicList">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,255 @@
+﻿@using DaleMusic.Models;
+@{ 
+    UserInfo user= Session["user"] as UserInfo;
+}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>大乐音乐</title>
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/owl.carousel.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/lb.css" rel="stylesheet" />
+    <link href="~/Content/css/style.css" rel="stylesheet" />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="~/Scripts/js/jquery.min.js"></script>
+    <script src="~/Scripts/js/lb.js"></script>
+    <!-- Custom Theme files -->
+    <!-- Custom Theme files -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    @*播放器*@
+    <link rel="stylesheet" href="~/Scripts/AplayerJSCS/APlayer.min.css" />
+    <script src="~/Scripts/AplayerJSCS/APlayer.min.js"></script>
+
+    @*返回顶部导航样式*@
+    <style type="text/css">
+        /* reset */
+        body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td {
+            margin: 0;
+            padding: 0
+        }
+
+        fieldset, img {
+            border: 0;
+        }
+
+        :focus {
+            outline: 0;
+        }
+
+        ol, ul {
+            list-style: none;
+            list-style-position: outside;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        address, caption, cite, code, dfn, em, i, strong, th, var, optgroup {
+            font-style: normal;
+            font-weight: normal;
+        }
+
+        body, button, input, select, textarea {
+            font: 12px/1.5 微软雅黑,arial,sans-serif;
+        }
+
+        button, input, select, textarea, h1, h2, h3, h4, h5, h6 {
+            font-size: 100%;
+        }
+
+        body {
+            color: #333;
+            min-width: 1120px;
+        }
+
+        a {
+            color: #333;
+            text-decoration: none;
+        }
+
+            a:hover {
+                color: #f60;
+                text-decoration: underline;
+            }
+
+                a:hover em, a:hover i, a:hover span {
+                    cursor: pointer;
+                }
+
+        .cf:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        .cf {
+            *zoom: 1;
+        }
+
+        /*** guide ***/
+        .guide {
+            width: 60px;
+            margin-left: 570px;
+            position: fixed;
+            left: 50%;
+            bottom: 134px;
+            _position: absolute;
+            _top: expression(documentElement.scrollTop+documentElement.clientHeight - this.clientHeight - 134+'px');
+            display: block;
+        }
+
+            .guide a {
+                display: block;
+                width: 60px;
+                height: 50px;
+                background: url('../../Content/images/sprite_v2.png') no-repeat;
+                margin-top: 10px;
+                text-decoration: none;
+                font: 16px/50px "Microsoft YaHei";
+                text-align: center;
+                color: #fff;
+                border-radius: 2px;
+            }
+
+                .guide a span {
+                    display: none;
+                    text-align: center;
+                }
+
+                .guide a:hover {
+                    text-decoration: none;
+                    background-color: #39F;
+                    color: #fff;
+                }
+
+                    .guide a:hover span {
+                        display: block;
+                        width: 60px;
+                        background: #39F
+                    }
+
+            .guide .find {
+                background-position: -84px -236px;
+            }
+
+            .guide .report {
+                background-position: -146px -236px;
+            }
+
+            .guide .edit {
+                background-position: -83px -185px;
+            }
+
+            .guide .top {
+                background-position: -145px -185px;
+            }
+    </style>
+</head>
+<body>
+    <!-- container -->
+    @*头部*@
+    <div class="header">
+        @*页面顶部*@
+        <div class="container" style="height:65px">
+            <!-- header -->
+            <!-- logo -->
+            @*Logo*@
+            <div class="logo">
+                <a href="/Music/Index"><img src="~/Content/images/logo.png" title="music" /></a>
+            </div>
+            <!-- logo -->
+            <!-- top-nav -->
+            @*导航*@
+            @if (user!=null)
+            {
+                <div class="top-nav">
+                    <span class="menu"> </span>
+                    <ul>
+                        <li class="active" style="font-size:1.2em;"><a href="/Music/Index">首页<span> </span></a></li>
+                        <li style="font-size:1.2em;"><a href="/MusicList/Index/@user.UserID">我的歌单</a></li>
+                        <li style="font-size:1.2em;"><a href="/User/Index">个人设置</a></li>
+                        <div class="clearfix"> </div>
+                    </ul>
+                </div>
+            }
+            else
+            {
+                <div class="top-nav">
+                    <span class="menu"> </span>
+                    <ul>
+                        <li class="active" style="font-size:1.2em;"><a href="/Music/Index">首页<span> </span></a></li>
+                        <li style="font-size:1.2em;"><a href="/Login/UserLogin">请登录</a></li>
+                        <div class="clearfix"> </div>
+                    </ul>
+                </div>
+            }
+            <div class="clearfix"> </div>
+            <!-- top-nav -->
+            <!-- script-for-menu -->
+            <script>
+                $(document).ready(function () {
+                    $("span.menu").click(function () {
+                        $(".top-nav ul").slideToggle(200);
+                    });
+                });
+            </script>
+            <!-- script-for-menu -->
+        </div>
+        <!-- header -->
+    </div>
+    <div>
+        @RenderBody()
+    </div>
+    @*返回顶部导航*@
+    <script src="/demos/googlegg.js"></script>
+    <div class="guide">
+        <div class="guide-wrap">
+            @*<a href="#" class="edit" title="发新帖"><span>发新帖</span></a>*@
+            <a href="javascript:window.scrollTo(0,0)" class="top" title="回顶部"><span>回顶部</span></a>
+        </div>
+    </div>
+    <div id="aplayer" class="aplayer" data-id="5097829626" data-server="netease" data-type="playlist" data-fixed="true" data-listfolded="true" data-order="random" data-theme="#F58EA8"></div>
+    <!-- footer -->
+    @*底部*@
+    <div class="footer">
+        <div class="container">
+            <div class="footer-grids">
+                <div class="col-md-3">
+                    <div class="footer-grid">
+                        <h5>关于大乐</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lobortis, urna a aliquam rhoncus,</p>
+                        <p> Ut ultrices diam enim, eget consectetur elit iaculis eu</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="footer-grid site-map">
+                        <h5>网站地图</h5>
+                        <ul>
+                            <li><a href="/Music/Index"><span> </span>首页</a></li>
+                            <li><a href="/User/Index"><span> </span>个人设置</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer -->
+    <!-- copy-right -->
+    <div class="copy-right">
+        <div class="container">
+            <p>版权所有 &copy; 2014.公司保留所有权利.</p>
+        </div>
+    </div>
+    <script src="~/Scripts/AplayerJSCS/meting.js"></script>
+    <!-- copy-right -->
+    <!-- container -->
+</body>
+</html>

@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "MusicCreat";
+    Layout = "~/Views/Shared/_LayoutManage.cshtml";
+}
+@using DaleMusic.Models;
+@model List<Music>
+<form action="/Manage/MusicCreat" method="post" class="form" onSubmit="return check(this)" enctype="multipart/form-data">
+    <div><span>音乐名称：</span><input type="text" name="MusicName" id="MusicName" placeholder="音乐名称" /><br /></div>
+	<div>
+		<span>音乐歌手：</span>
+		<select id="SingerID" name="SingerID">
+			<option>---请选择音乐歌手---</option>
+			@foreach (var item in ViewBag.singer as List<Singer>)
+			{
+				<option value="@item.SingerID">@item.SingerName</option>
+			}
+		</select>
+		<br />
+	</div>
+    <div>
+		<span>音乐类型：</span>
+		<select id="TypeID" name="TypeID">
+			<option>---请选择音乐类型---</option>
+			@foreach (var item in ViewBag.musictype as List<MusicType>)
+			{
+				<option value="@item.TypeID">@item.TypeName</option>
+			}
+		</select>
+	<br />
+	</div>
+    <div><span>音乐国家：</span><input type="text" name="MusicCountry" id="MusicCountry" placeholder="音乐国家" /><br />	</div>
+    <div><span>音乐封面：</span><input type="file" name="MusicImage" id="MusicImage" /><br /></div>
+	<div><span>发布日期：</span><input type="date" name="MusicDate" id="MusicDate" placeholder="发布日期" /><br /></div>
+    <div><span>音乐地址：</span><input type="file" name="MusicFiles" id="MusicFiles" /><br />	</div>
+	<input type="hidden" name="IsDelete" id="IsDelete" value="true" />
+    <input type="submit" value="提交" class="submit" />
+    <a href="/Manage/MusicManage">返回上一级</a>
+</form>
+<script type="text/javascript">
+function check(){
+//			音乐名称
+		var name = document.getElementById("MusicName");
+		if(name.value==''){
+			alert('音乐名称不能为空');
+			name.focus();
+			return false;
+		}else{
+			var vname=(/^[a-zA-Z\u4e00-\u9fa5]{2,20}$/);
+			if (!vname.test(name.value)) {
+				alert('音乐名称2-20个字，只能是中文或英文');
+				name.focus();
+				return false;
+			}
+		}
+
+
+
+}
+
+</script>
+
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+</div>
+
+

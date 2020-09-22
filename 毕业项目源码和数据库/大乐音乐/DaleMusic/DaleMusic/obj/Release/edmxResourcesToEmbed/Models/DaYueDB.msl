@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DaYueDBModelStoreContainer" CdmEntityContainer="DaYueDBEntities">
+    <EntitySetMapping Name="Manage">
+      <EntityTypeMapping TypeName="DaYueDBModel.Manage">
+        <MappingFragment StoreEntitySet="Manage">
+          <ScalarProperty Name="ManageID" ColumnName="ManageID" />
+          <ScalarProperty Name="ManageAccount" ColumnName="ManageAccount" />
+          <ScalarProperty Name="ManagePwd" ColumnName="ManagePwd" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Music">
+      <EntityTypeMapping TypeName="DaYueDBModel.Music">
+        <MappingFragment StoreEntitySet="Music">
+          <ScalarProperty Name="MusicID" ColumnName="MusicID" />
+          <ScalarProperty Name="SingerID" ColumnName="SingerID" />
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+          <ScalarProperty Name="MusicImage" ColumnName="MusicImage" />
+          <ScalarProperty Name="MusicName" ColumnName="MusicName" />
+          <ScalarProperty Name="MusicCountry" ColumnName="MusicCountry" />
+          <ScalarProperty Name="MusicDate" ColumnName="MusicDate" />
+          <ScalarProperty Name="MusicFiles" ColumnName="MusicFiles" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MusicType">
+      <EntityTypeMapping TypeName="DaYueDBModel.MusicType">
+        <MappingFragment StoreEntitySet="MusicType">
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Singer">
+      <EntityTypeMapping TypeName="DaYueDBModel.Singer">
+        <MappingFragment StoreEntitySet="Singer">
+          <ScalarProperty Name="SingerID" ColumnName="SingerID" />
+          <ScalarProperty Name="SingerName" ColumnName="SingerName" />
+          <ScalarProperty Name="SingerType" ColumnName="SingerType" />
+          <ScalarProperty Name="SingerImage" ColumnName="SingerImage" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserInfo">
+      <EntityTypeMapping TypeName="DaYueDBModel.UserInfo">
+        <MappingFragment StoreEntitySet="UserInfo">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserPwd" ColumnName="UserPwd" />
+          <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MusicList">
+      <EntityTypeMapping TypeName="DaYueDBModel.MusicList">
+        <MappingFragment StoreEntitySet="MusicList">
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="MusicID" ColumnName="MusicID" />
+          <ScalarProperty Name="ListID" ColumnName="ListID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

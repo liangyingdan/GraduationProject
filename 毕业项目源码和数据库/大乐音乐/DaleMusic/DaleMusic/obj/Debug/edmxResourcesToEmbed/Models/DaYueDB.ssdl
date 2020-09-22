@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DaYueDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Manage">
+    <Key>
+      <PropertyRef Name="ManageID" />
+    </Key>
+    <Property Name="ManageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ManageAccount" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ManagePwd" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Music">
+    <Key>
+      <PropertyRef Name="MusicID" />
+    </Key>
+    <Property Name="MusicID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SingerID" Type="int" Nullable="false" />
+    <Property Name="TypeID" Type="int" Nullable="false" />
+    <Property Name="MusicImage" Type="nvarchar" MaxLength="4000" />
+    <Property Name="MusicName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MusicCountry" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MusicDate" Type="date" Nullable="false" />
+    <Property Name="MusicFiles" Type="nvarchar" MaxLength="4000" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MusicList">
+    <Key>
+      <PropertyRef Name="ListID" />
+    </Key>
+    <Property Name="ListID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MusicID" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MusicType">
+    <Key>
+      <PropertyRef Name="TypeID" />
+    </Key>
+    <Property Name="TypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Singer">
+    <Key>
+      <PropertyRef Name="SingerID" />
+    </Key>
+    <Property Name="SingerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SingerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="SingerType" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="SingerImage" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserPwd" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserPhone" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Music_Singer">
+    <End Role="Singer" Type="Self.Singer" Multiplicity="1" />
+    <End Role="Music" Type="Self.Music" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Singer">
+        <PropertyRef Name="SingerID" />
+      </Principal>
+      <Dependent Role="Music">
+        <PropertyRef Name="SingerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Music_Type">
+    <End Role="MusicType" Type="Self.MusicType" Multiplicity="1" />
+    <End Role="Music" Type="Self.Music" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MusicType">
+        <PropertyRef Name="TypeID" />
+      </Principal>
+      <Dependent Role="Music">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MusicList_Music">
+    <End Role="Music" Type="Self.Music" Multiplicity="1" />
+    <End Role="MusicList" Type="Self.MusicList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Music">
+        <PropertyRef Name="MusicID" />
+      </Principal>
+      <Dependent Role="MusicList">
+        <PropertyRef Name="MusicID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MusicList_UserInfo">
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+    <End Role="MusicList" Type="Self.MusicList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="MusicList">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DaYueDBModelStoreContainer">
+    <EntitySet Name="Manage" EntityType="Self.Manage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Music" EntityType="Self.Music" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MusicList" EntityType="Self.MusicList" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MusicType" EntityType="Self.MusicType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Singer" EntityType="Self.Singer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Music_Singer" Association="Self.FK_Music_Singer">
+      <End Role="Singer" EntitySet="Singer" />
+      <End Role="Music" EntitySet="Music" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Music_Type" Association="Self.FK_Music_Type">
+      <End Role="MusicType" EntitySet="MusicType" />
+      <End Role="Music" EntitySet="Music" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MusicList_Music" Association="Self.FK_MusicList_Music">
+      <End Role="Music" EntitySet="Music" />
+      <End Role="MusicList" EntitySet="MusicList" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MusicList_UserInfo" Association="Self.FK_MusicList_UserInfo">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="MusicList" EntitySet="MusicList" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

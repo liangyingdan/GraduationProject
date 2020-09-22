@@ -1,0 +1,73 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>大乐音乐网用户登录</title>
+
+    <link href="~/Content/css/Loginstyle.css" rel="stylesheet" />
+
+    <script src="~/Scripts/js/form.js"></script>
+
+</head>
+<body>
+
+    <div class="form" style="position:relative">
+
+        <!--登录表单-->
+        <div class="form_login" style="position:absolute">
+            <form action="/Login/UserLogin" method="post">
+                <h1>登录大乐音乐网</h1>
+                <div class="form_item">
+                    <label for="UserName">用户名：</label>
+                    <input type="text" name="UserName" id="UserName" placeholder="请输入用户名" required>
+                </div>
+                <div class="form_item">
+                    <label for="UserPwd">密码：</label>
+                    <input type="password" name="UserPwd" id="UserPwd" placeholder="请输入密码名" required>
+                </div>
+                <div class="form_item1">
+                    <input type="submit" value="登录" style="width:425px;margin:auto;">
+                </div>
+            </form>
+            <div class="info">没有账号？点击<span class="switch register_Btn">注册账号</span><br />
+            <a class="switch register_Btn" href="/Login/ManageLogin" style="">管理员登陆</a>
+            </div>
+        </div>
+
+        <!--注册表单-->
+        <div class="form_register" style="height:0;">
+            <form action="/Login/UserRegister" method="post">
+                <h1>注册大乐音乐网</h1>
+                <div class="form_item">
+                    <label for="UserName">用户名：</label>
+                    <input type="text" name="UserName" id="UserName" placeholder="请输入用户名" required>
+                </div>
+                <div class="form_item">
+                    <label for="UserPwd">密码：</label>
+                    <input type="password" name="UserPwd" id="UserPwd" placeholder="请输入密码名" required>
+                </div>
+                <div class="form_item">
+                    <label for="UserEmail">电子邮箱：</label>
+                    <input type="email" name="UserEmail" id="UserEmail" placeholder="请输入电子邮件" required>
+                </div>
+                <div class="form_item">
+                    <label for="UserPhone">电话：</label>
+                    <input type="tel" name="UserPhone" id="UserPhone" placeholder="请输入手机号码" required>
+                </div>
+                <div class="form_item1">
+                    <input type="submit" value="注册" style="width:425px;margin:auto;">
+                </div>
+            </form>
+            <div class="info">已有账号？点击<span class="switch login_Btn">登录</span></div>
+        </div>
+
+    </div>
+</body>
+</html>

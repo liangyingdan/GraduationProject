@@ -1,0 +1,108 @@
+﻿
+@{
+	ViewBag.Title = "UserUpload";
+	Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+
+
+	<form action="/User/Message" method="post" class="form" onSubmit="return check(this)">
+		<div><span>音乐名称：</span><input type="text" name="name" id="name" placeholder="音乐名" /><br /></div>
+		<div>
+			<span>音乐类型：</span>
+			<select>
+				<option>选择类型</option>
+				<option>恐怖</option>
+				<option>恐怖</option>
+				<option>恐怖</option>
+			</select>
+			<br />
+		</div>
+
+		<div><span>音乐附件：</span><input type="password" name="pwd2" id="pwd2" placeholder="音乐附件" /><br />	</div>
+		<div><span>发布时间：</span><input type="password" name="pwd2" id="pwd2" placeholder="发布时间" /><br /></div>
+		<input type="submit" value="提交" class="submit" />
+	</form>
+<script type="text/javascript">
+	function check() {
+		//			姓名
+		var name = document.getElementById("name");
+		if (name.value == '') {
+			alert('姓名不能为空');
+			name.focus();
+			return false;
+		} else {
+			var vname = (/^[a-zA-Z\u4e00-\u9fa5]{2,10}$/);
+			if (!vname.test(name.value)) {
+				alert('姓名2-10个字，只能是中文或英文');
+				name.focus();
+				return false;
+			}
+		}
+
+		//			电话
+		var phone = document.getElementById('phone');
+		if (phone.value == '') {
+			alert('电话不能为空');
+			phone.focus();
+			return false;
+		} else {
+			var phone_reg = /^13[0-9]{1}[0-9]{8}$|15[0-9]{1}[0-9]{8}$|18[0-9]{1}[0-9]{8}|17[0-9]{1}[0-9]{8}$|14[0-9]{1}[0-9]{8}/;
+			var tel_reg = /^([0-9]{3,4}-)?[0-9]{7,8}$/;
+			if (!phone_reg.test(phone.value) && !tel_reg.test(phone.value)) {
+				alert('手机或电话号码格式不正确。如果是固定电话，必须形如(xxxx-xxxxxxxx)');
+				phone.focus();
+				return false;
+			}
+		}
+
+		//			密码
+		var pwd1 = document.getElementById('pwd1');
+		if (pwd1.value == '') {
+			alert('密码不能为空');
+			pwd1.focus();
+			return false;
+		} else {
+			var vpwd = /^[A-Za-z0-9]+$/;
+			if (!vpwd.test(pwd1.value)) {
+				alert('密码错误，密码由数字和字母组成');
+				pwd1.focus();
+				return false;
+			} else {
+				if (pwd1.value.length < 6) {
+					alert('密码不能少于6位');
+					pwd1.focus();
+					return false;
+				}
+			}
+		}
+		//			验证密码
+		var pwd2 = document.getElementById('pwd2');
+		if (!(pwd2.value == pwd1.value)) {
+			alert('确认密码与第一次输入不同，请重新输入');
+			pwd2.focus();
+			return false;
+		}
+
+		//			邮箱
+		var email = document.getElementById('email');
+		if (email.value == '') {
+			alert('邮箱不能为空');
+			email.focus();
+			return false;
+		} else {
+			var vemail = /^[0-9a-zA-Z]+(?:[\_\.\-][a-z0-9\-]+)*@@[a-zA-Z0-9]+(?:[-.][a-zA-Z0-9]+)*\.[a-zA-Z]+$/i;
+			if (!vemail.test(email.value)) {
+				alert('邮箱格式错误');
+				email.focus();
+				return false;
+			}
+		}
+
+	}
+
+</script>
+
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+</div>
+

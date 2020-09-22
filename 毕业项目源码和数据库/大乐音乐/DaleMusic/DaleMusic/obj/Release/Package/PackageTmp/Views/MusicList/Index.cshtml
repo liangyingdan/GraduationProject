@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutList.cshtml";
+}
+@using DaleMusic.Models;
+@model List<MusicList>
+@if (Model.Count()>0)
+{
+   
+    <table class="table table-bordered">
+        <tr>
+            <th>音乐名称</th>
+            <th>歌手</th>
+            <th>音乐类型</th>
+            <th>国家</th>
+            <th>封面</th>
+            <th>发布日期</th>
+            <th>操作</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td><a href="/Music/Detail/@item.MusicID">@item.Music.MusicName</a></td>
+                <td><a href="/Music/SingerDatail/@item.Music.Singer.SingerID">@item.Music.Singer.SingerName</a></td>
+                <td>@item.Music.MusicType.TypeName</td>
+                <td>@item.Music.MusicCountry</td>
+                <td>
+                    <img src="~/Content/images/@item.Music.MusicImage" style="height:70px;width:50px" />
+                </td>
+                <td>@item.Music.MusicDate.Year 年 @item.Music.MusicDate.Month 月</td>
+                <td>
+                    <a href="/MusicList/Create?type=0&id=@item.MusicID">取消收藏</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <h2 style="align-content:center">您还没有收藏歌曲</h2>
+}

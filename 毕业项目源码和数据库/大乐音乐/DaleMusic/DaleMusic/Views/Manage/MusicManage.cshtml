@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "MusicManage";
+    Layout = "~/Views/Shared/_LayoutManage.cshtml";
+}
+
+@using DaleMusic.Models;
+@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<Music>
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<h2>音乐列表</h2>
+<p>
+    <a href="/Manage/MusicCreat">添加新的音乐</a>
+</p>
+<form action="/Manage/MusicManage" method="post">
+    <input type="text" name="MusicName" id="MusicName" placeholder="输入音乐名称搜索" required>
+    <input type="submit" value="搜索" />
+</form>
+<table class="table">
+    <tr>
+        <th>编号</th>
+        <th>音乐名称</th>
+        <th>歌手</th>
+        <th>音乐类型</th>
+        <th>国家</th>
+        <th>封面</th>
+        <th>发布日期</th>
+        <th>音乐地址</th>
+        <th>操作</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.MusicID</td>
+            <td>@item.MusicName</td>
+            <td>@item.Singer.SingerName</td>
+            <td>@item.MusicType.TypeName</td>
+            <td>@item.MusicCountry</td>
+            <td>
+                <img src="~/Content/images/@item.MusicImage" style="height:70px;width:50px" />
+            </td>
+            <td>@item.MusicDate.Year 年 @item.MusicDate.Month 月</td>
+            <td>@item.MusicFiles</td>
+            <td>
+                <a href="/Manage/MusicDetails/@item.MusicID">编辑</a>
+                @if (item.IsDelete == false)
+                {
+                    <a href="/Manage/MusicIsDelete/@item.MusicID" onclick="return confirm('确定要恢复它吗？')">恢复</a>
+                }
+                else
+                {
+                    <a href="/Manage/MusicDelete/@item.MusicID" onclick="return confirm('确定要删除它吗？')">删除</a>
+                }
+            </td>
+        </tr>
+    }
+</table>
+<div>
+    每页 @Model.PageSize 记录，总有 @Model.PageCount 页，当前 @Model.PageNumber 页
+    @Html.PagedListPager(Model, page => Url.Action("MusicManage", new { page }))
+</div>
+
+

@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "UserDetails";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+@using DaleMusic.Models
+@model UserInfo
+
+    <div>
+        <input type="hidden" name="UserID" id="UserID" value="@Model.UserID" />        
+        <div><span>姓名：</span><input type="text" name="UserName" readonly="readonly" id="UserName" value="@Model.UserName" /><br /></div>
+        <div><span>电话：</span><input type="text" name="UserPhone" readonly="readonly" id="UserPhone" value="@Model.UserPhone" /><br /></div>
+        <div><span>密码：</span><input type="text" name="UserPwd" readonly="readonly" id="UserPwd" value="@Model.UserPwd" /><br /></div>
+        <div><span>邮箱：</span><input type="text" name="UserEmail" readonly="readonly" id="UserEmail" value="@Model.UserEmail" /><br /></div>
+        <a class="btn btn-default" href="/User/UserEdit?id=@Model.UserID">编辑</a>
+
+    </div>
+

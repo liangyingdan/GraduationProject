@@ -1,0 +1,10 @@
+F:\项目\大乐音乐\DaleMusic\BLL\bin\Release\BLL.dll
+F:\项目\大乐音乐\DaleMusic\BLL\bin\Release\BLL.pdb
+F:\项目\大乐音乐\DaleMusic\BLL\bin\Release\DAL.dll
+F:\项目\大乐音乐\DaleMusic\BLL\bin\Release\Models.dll
+F:\项目\大乐音乐\DaleMusic\BLL\bin\Release\DAL.pdb
+F:\项目\大乐音乐\DaleMusic\BLL\bin\Release\Models.pdb
+F:\项目\大乐音乐\DaleMusic\BLL\obj\Release\BLL.csprojAssemblyReference.cache
+F:\项目\大乐音乐\DaleMusic\BLL\obj\Release\BLL.csproj.CopyComplete
+F:\项目\大乐音乐\DaleMusic\BLL\obj\Release\BLL.dll
+F:\项目\大乐音乐\DaleMusic\BLL\obj\Release\BLL.pdb

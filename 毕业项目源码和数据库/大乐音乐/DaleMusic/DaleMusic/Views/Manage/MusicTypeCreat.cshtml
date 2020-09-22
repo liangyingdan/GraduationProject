@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "MusicTypeCreat";
+    Layout = "~/Views/Shared/_LayoutManage.cshtml";
+}
+
+<form action="/Manage/MusicTypeCreat" method="post" class="form" onSubmit="return check(this)">
+    <div><span>音乐类型：</span><input type="text" name="TypeName" id="TypeName" placeholder="音乐类型" /><br /></div>
+    <input type="submit" value="提交" class="submit" />
+    <a href="/Manage/MusicTypeManage">返回上一级</a>
+</form>
+<script type="text/javascript">
+function check(){
+//			音乐类型
+		var name = document.getElementById("TypeName");
+		if(name.value==''){
+			alert('音乐类型不能为空');
+			name.focus();
+			return false;
+		}else{
+			var vname=(/^[a-zA-Z\u4e00-\u9fa5]{2,10}$/);
+			if (!vname.test(name.value)) {
+				alert('音乐类型2-10个字，只能是中文或英文');
+				name.focus();
+				return false;
+			}
+		}
+
+}
+
+</script>
+
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+</div>
+

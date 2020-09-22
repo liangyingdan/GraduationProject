@@ -1,0 +1,242 @@
+﻿
+@{
+    ViewBag.Title = "TypeIndex";
+    Layout = "~/Views/Shared/_LayoutMusic.cshtml";
+}
+
+@using DaleMusic.Models;
+@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<MusicType>
+
+<!-- banner -->
+@*中部*@
+<div class="banner">
+    <!-- slider -->
+    <!--- img-slider --->
+    <div class="img-slider">
+        <!----start-slider-script---->
+        <script src="~/Scripts/js/responsiveslides.min.js"></script>
+        <script>
+            // You can also use "$(window).load(function() {"
+            $(function () {
+                // Slideshow 4
+                $("#slider4").responsiveSlides({
+                    auto: true,
+                    pager: true,
+                    nav: true,
+                    speed: 500,
+                    namespace: "callbacks",
+                    before: function () {
+                        $('.events').append("<li>before event fired.</li>");
+                    },
+                    after: function () {
+                        $('.events').append("<li>after event fired.</li>");
+                    }
+                });
+
+            });
+        </script>
+        <script>
+            window.onload = function () {
+                // 轮播选项
+                const options = {
+                    id: 'lb-1',              // 轮播盒ID
+                    speed: 600,              // 轮播速度(ms)
+                    delay: 3000,             // 轮播延迟(ms)
+                    direction: 'left',       // 图片滑动方向
+                    moniterKeyEvent: true,   // 是否监听键盘事件
+                    moniterTouchEvent: true  // 是否监听屏幕滑动事件
+                }
+                const lb = new Lb(options);
+                lb.start();
+            }
+        </script>
+        <!----//End-slider-script---->
+        <!-- Slideshow 4 -->
+        @*轮播及字*@
+        <div class="lb-box" id="lb-1">
+            <!-- 轮播内容 -->
+            <div class="lb-content">
+                <div class="lb-item active">
+                    <a href="#">
+                        <img src="~/Content/images/轮播1.jpg" alt="picture loss">
+                        <span></span>
+                    </a>
+                </div>
+                <div class="lb-item">
+                    <a href="#">
+                        <img src="~/Content/images/轮播2.jpg" alt="picture loss">
+                        <span></span>
+                    </a>
+                </div>
+                <div class="lb-item">
+                    <a href="#">
+                        <img src="~/Content/images/轮播3.jpg" alt="picture loss">
+                        <span></span>
+                    </a>
+                </div>
+                <div class="lb-item">
+                    <a href="#">
+                        <img src="~/Content/images/轮播4.jpg" alt="picture loss">
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+            <!-- 轮播标志 -->
+            <ol class="lb-sign">
+                <li class="active">1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+            </ol>
+            <!-- 轮播控件 -->
+            <div class="lb-ctrl left">＜</div>
+            <div class="lb-ctrl right">＞</div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+    <!-- slider -->
+</div>
+<!-- banner -->
+<!-- categories -->
+@*中部类型*@
+<div class="categories" style="background:#DCDCDC;box-shadow: 1px -1px 3px #797979;height:65px">
+    <div class="container">
+        <div class="categories-left">
+            <ul class="options">
+                <li style="font-size:2em;"><a href="/Music/Index">个性推荐</a></li>
+                <li style="font-size:2em;"><a href="/Music/TypeIndex">分类歌单</a></li>
+                <li style="font-size:2em;"><a href="/Music/SingerDatail">歌手</a></li>
+            </ul>
+        </div>
+        <div class="categories-right">
+            <form action="/Music/TypeIndex" method="post">
+                <input type="text" name="TypeName" id="TypeName" placeholder="输入类型名称搜索" style="font-size:1.5em;" required>
+                <input type="submit" value="搜索" style="font-size:1.5em;" />
+            </form>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<!-- categories -->
+<!-- content -->
+@*中部内容*@
+<div class="content">
+    <div class="container">
+        <!-- content-left -->
+        @*内容左侧*@
+        <div class="col-md-8 content-left">
+            @foreach (var item in Model)
+            {
+                <div onclick="location.href='/Music/TypeDatail?id=@item.TypeID';" class="artical">
+                    <div class="col-md-8 artical-right">
+                        <div class="artical-head">
+                            <h2><a href="~/Music/TypeDatail/@item.TypeID" style="font-size:2em">@item.TypeName</a></h2>
+                            <div class="clearfix"> </div>
+                        </div>
+                        <div class="clearfix"> </div>
+                        <!-- artical-info -->
+                        <!-- artical-info -->
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            }
+
+            <!-- pagenate -->
+            <!-- pagenate -->
+            @*分页*@
+            <div>
+                每页 @Model.PageSize 记录，总有 @Model.PageCount 页，当前 @Model.PageNumber 页
+                @Html.PagedListPager(Model, page => Url.Action("TypeIndex", new { page }))
+            </div>
+        </div>
+        <!-- content-right -->
+        @*内容右侧*@
+        <div class="col-md-4 content-right">
+            <div class="recent-add">
+                <!----sreen-gallery-cursual---->
+                <div class="sreen-gallery-cursual">
+                    <!-- requried-jsfiles-for owl -->
+                    <link href="~/Content/css/owl.carousel.css" rel="stylesheet" />
+                    <script src="~/Scripts/js/owl.carousel.js"></script>
+                    <script>
+                        $(document).ready(function () {
+                            $("#owl-demo").owlCarousel({
+                                items: 1,
+                                lazyLoad: true,
+                                autoPlay: true,
+                                navigation: true,
+                                navigationText: false,
+                                pagination: true,
+                            });
+                        });
+                    </script>
+                    <!-- //requried-jsfiles-for owl -->
+                    <!-- start content_slider -->
+                    @*小轮播*@
+                    <div id="owl-demo" class="owl-carousel text-center">
+                        <div class="item">
+                            <img class="lazyOwl" src="~/Content/images/酒醉的蝴蝶.jpg" alt="name">
+                        </div>
+                        <div class="item">
+                            <img class="lazyOwl" src="~/Content/images/无价之姐.jpg" alt="name">
+                        </div>
+                        <div class="item">
+                            <img class="lazyOwl" src="~/Content/images/微微.jpg" alt="name">
+                        </div>
+                    </div>
+                    <!--//sreen-gallery-cursual---->
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+            <!-- popular-allbums -->
+            @*热门专辑*@
+            <div class="popular-albums">
+                <h2>热门音乐</h2>
+                <div onclick="location.href='/Music/Detail';" class="popular-allbum">
+                    <div class="popular-allbum-pic">
+                        <a href="#"><img src="~/Content/images/消愁.jpg" title="name" /></a>
+                    </div>
+                    <div class="popular-allbum-info">
+                        <h3><a href="#">消愁</a></h3>
+                        <p><strong>发行日期：</strong>  2017年7月</p>
+                        <p><strong>类型：</strong>流行</p>
+                        <p><strong>国家：</strong>中国</p>
+                        <p><strong>歌手：</strong> 毛不易</p>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <div onclick="location.href='/Music/Detail';" class="popular-allbum">
+                    <div class="popular-allbum-pic">
+                        <a href="#"><img src="~/Content/images/大鱼海棠.jpg" title="name" /></a>
+                    </div>
+                    <div class="popular-allbum-info">
+                        <h3><a href="#">大鱼</a></h3>
+                        <p><strong>发行日期：</strong>  2016年5月</p>
+                        <p><strong>类型：</strong>古风</p>
+                        <p><strong>国家：</strong>中国</p>
+                        <p><strong>歌手：</strong> 周深</p>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <div onclick="location.href='/Music/Detail';" class="popular-allbum">
+                    <div class="popular-allbum-pic">
+                        <a href="#"><img src="~/Content/images/知否知否.jpg" title="name" /></a>
+                    </div>
+                    <div class="popular-allbum-info">
+                        <h3><a href="#">知否知否</a></h3>
+                        <p><strong>发行日期：</strong>  2018年12月</p>
+                        <p><strong>类型：</strong>古风</p>
+                        <p><strong>国家：</strong>中国</p>
+                        <p><strong>歌手：</strong> 郁可唯</p>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+            <!-- popular-allbums -->
+            <!-- content-right -->
+        </div>
+    </div>
+</div>
+<!-- content -->

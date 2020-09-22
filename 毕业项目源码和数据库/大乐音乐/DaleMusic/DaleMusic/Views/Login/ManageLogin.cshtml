@@ -1,0 +1,42 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>大乐音乐网管理登录</title>
+
+    <link href="~/Content/css/Loginstyle.css" rel="stylesheet" />
+
+    <script src="~/Scripts/js/form.js"></script>
+
+</head>
+<body>
+
+    <div class="form" style="position:relative">
+
+        <!--登录表单-->
+        <div class="form_login" style="position:absolute">
+            <form action="/Login/ManageLogin" method="post">
+                <h1>登录大乐音乐网</h1>
+                <div class="form_item">
+                    <label for="ManageAccount">用户名：</label>
+                    <input type="text" name="ManageAccount" id="ManageAccount" placeholder="请输入管理名" required>
+                </div>
+                <div class="form_item">
+                    <label for="ManagePwd">密码：</label>
+                    <input type="password" name="ManagePwd" id="ManagePwd" placeholder="请输入密码名" required>
+                </div>
+                <div class="form_item1">
+                    <input type="submit" value="登录" style="width:425px;margin:auto;">
+                </div>
+            </form>
+        </div>  
+    </div>
+</body>
+</html>
